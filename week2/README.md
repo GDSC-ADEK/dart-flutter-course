@@ -1,2 +1,9 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+
+Content voor week 2.
+We gaan over het volgende
+- hoe je een dart project start
+- de dependencies file
+- math operators
+- logical operators
+- functions
+- classes (hopelijk)
