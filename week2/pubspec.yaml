@@ -1,17 +1,17 @@
 name: week2
-description: A sample command-line application.
-version: 1.0.0
-# homepage: https://www.example.com
+description: some informative description
+version: 0.1.0 # version of your project
+# homepage: https://www.projectwebsite.com
 
-environment:
+environment: # what dart version to use
   sdk: '>=2.14.4 <3.0.0'
 
-
-# dependencies:
-#   path: ^1.8.0
+dependencies:
+  path: ^1.8.0
 
 dev_dependencies:
   lints: ^1.0.0
   test: ^1.16.0
   characters: ^1.2.0
+  # add dependencies here
   # http: ^0.13.4
