@@ -6,7 +6,7 @@ import 'dart:math';
   */
 
 // clarification van laatste week, ik weet niet of ik dit moet behandelen
-void const_vs_final() {
+void constVsFinal() {
   const mylist = [""];
   // if a container is const, it and its items are recursively immutable as well
   // mylist[0] = "It changed"; // * this will throw an exception
@@ -29,7 +29,7 @@ void const_vs_final() {
   print(mylist3);
 }
 
-void math_operators1() {
+void arithmeticOperators1() {
   int y = 100 - 12;
   int z = 100 + 12;
   int a = 100 * 12;
@@ -49,7 +49,7 @@ void math_operators1() {
     """);
 }
 
-void math_operators2() {
+void arithmeticOperators2() {
   double x = 100;
   x -= 12;
   x += 12;
@@ -62,7 +62,7 @@ void math_operators2() {
   print("y ~/= 3 = $y");
 }
 
-void increment_decrement() {
+void incrementDecrement() {
   int x = 1;
   var y = x++; // postfix
   print("y = $y, x = $x");
@@ -75,9 +75,9 @@ void increment_decrement() {
   print("y = $y, x = $x");
 }
 
-void logical_and_relational_operators() {
+void logicalAndRelationalOps() {
   var a = true && false; // and
-  var b = true || false; //or
+  var b = false || true; //or
   var c = !true; // not
   var d = true == true;
   var e = true != false;
@@ -85,11 +85,10 @@ void logical_and_relational_operators() {
   var g = 6 > 5;
   var h = 5 <= 6;
   var i = 7 >= 5;
-
   var age = 20;
   var ageLt18 = (age > 18) ? true : false;
   // ternary operator, equivalent to
-  var isAdult;
+  bool isAdult;
   if (age > 18) {
     isAdult = true;
   } else {
@@ -97,9 +96,9 @@ void logical_and_relational_operators() {
   }
 
   print("a= $a,b=$b, c=$c, d=$d, e=$e, f=$f, g=$g, h=$h, i=$i");
+  print("$isAdult, $ageLt18");
 
-  var j = 10;
-  // if (j) { // * will throw an error
+  // if (age) { // * will throw an error
   //   print("ints cast cast down to bool");
   // }
 
@@ -133,21 +132,21 @@ void strings() {
   // find first and last occurence of substring
   var another = "a substring is a part of a string.";
   var substring = "string";
-  var first_pos = another.indexOf(substring);
-  var last_pos = another.lastIndexOf(substring);
-  print("first = $first_pos, last= $last_pos");
-  print(another.substring(first_pos, first_pos + substring.length));
-  print(another.substring(last_pos, last_pos + substring.length));
+  var firstPos = another.indexOf(substring);
+  var lastPos = another.lastIndexOf(substring);
+  print("first = $firstPos, last= $lastPos");
+  print(another.substring(firstPos, firstPos + substring.length));
+  print(another.substring(lastPos, lastPos + substring.length));
   // indexOf and lastIndexOf return -1 when not found
   print(another.indexOf("sagar"));
   // they also take regex
-  var url_reg = RegExp(r"([\w\-\d]+\.{1})+\w+(\:\d+)?[\w/\d\%\.]+");
+  var urlReg = RegExp(r"([\w\-\d]+\.{1})+\w+(\:\d+)?[\w/\d\%\.]+");
   var url = "The page is sramsaransing.com/projects/awesomeProj.html";
-  var startpos = url.indexOf(url_reg);
+  var startpos = url.indexOf(urlReg);
   print(url.substring(startpos, url.length));
   // you can replace
   url = url.replaceAll("page", "email");
-  url = url.replaceAll(url_reg, "email@fake.com");
+  url = url.replaceAll(urlReg, "email@fake.com");
   print(url);
   // you can split by some delimiter
   var sentence = "this is a sentence";
@@ -158,8 +157,8 @@ void strings() {
 enum Weather { rain, sun, snow, unknown } // a bit like scoped enums in c++
 // they have to be top level, not in classes or functions.
 
-void control_flow() {
-  var rng = new Random();
+void controlFlow() {
+  var rng = Random();
   var today = Weather.values[rng.nextInt(4)];
   // imagine it pulled this data from some weather api instead
   if (today == Weather.rain) {
@@ -205,13 +204,15 @@ void control_flow() {
   }
   // there's also the forEach, but it doesn't work on strings.
   // it does work on other collections
-  var first_primes = [2, 3, 5, 7, 11, 13, 17];
-  first_primes.forEach((prime) {
+  var firstPrimes = [2, 3, 5, 7, 11, 13, 17];
+  firstPrimes.forEach((prime) {
+    // not recommended, but it exists
     print(prime);
   });
 
-  first_primes.forEach((prime) => print(prime));
-  // there's the while and do while loop, just like C++
+  firstPrimes.forEach((prime) => print(prime));
+
+  // there's the while and do while loop as well, just like C++
 
   bool isPrime(int n) => true;
   //^ imagine this actually checks if a number is prime
@@ -228,22 +229,104 @@ void control_flow() {
   }
 }
 
-void functions() {
+void functions1() {
   bool isBreakTime(DateTime now) {
-    var begin = DateTime(2021, 11, 6, 16, 0, 0, 0);
-    var end = DateTime(2021, 11, 6, 16, 15, 0, 0);
+    var begin = DateTime(2021, 11, 13, 16, 0, 0, 0);
+    var end = DateTime(2021, 11, 13, 16, 15, 0, 0);
     return begin.isBefore(now) && end.isAfter(now);
   }
 
-  // ignore the line below, it is to hide a warning on how to do something.
-  // ignore: prefer_function_declarations_over_variables
+  // anonymous functions (unnamed functions) can be assigned to a Function var
   Function isBreakTime2 = (DateTime now) {
-    var begin = DateTime(2021, 11, 6, 16, 0, 0, 0);
-
-    var end = DateTime(2021, 11, 6, 16, 15, 0, 0);
+    var begin = DateTime(2021, 11, 13, 16, 0, 0, 0);
+    var end = DateTime(2021, 11, 13, 16, 15, 0, 0);
     return begin.isBefore(now) && end.isAfter(now);
   };
+  // arrow functions
+  bool isBreakTime3(DateTime now) =>
+      DateTime(2021, 11, 13, 16, 0, 0, 0).isBefore(now) &&
+      DateTime(2021, 11, 13, 16, 15, 0, 0).isAfter(now);
+  // return_type fnct_name(parameters) => expression;
+  // you usually use those for quick oneliner functions
+  // ^ that doesn't fit reasonably on a line, so you'd rather use the method employed in isBreakTime2
 
   isBreakTime(DateTime.now());
   isBreakTime2(DateTime.now());
+  isBreakTime3(DateTime.now());
+}
+
+void functions2() {
+  // how to make parameters optional
+  String fullName(String first, String last, [String? title]) {
+    if (title != null) {
+      return '$title $first $last';
+    } else {
+      return '$first $last';
+    }
+  }
+
+  // Or even better, assigning sane defaults to them
+  bool withinTolerance(int value, [int min = 0, int max = 10]) {
+    return min <= value && value <= max;
+  }
+
+  // function with named parameters
+  bool withinTolerance2(int value, {int min = 0, int max = 10}) {
+    return min <= value && value <= max;
+  }
+
+  // now you must name the parameters when calling the function
+  withinTolerance(5, 3, 7); // ok
+  withinTolerance2(5, min: 3, max: 7); // ok
+  withinTolerance2(5); // ok
+  // withinTolerance2(3, 5,7); // * error
+
+  // what if you want named parameters but not optional ones?
+  bool withinTolerance3({required int value, required int min, required max}) {
+    return min <= value && value <= max;
+  }
+
+  withinTolerance3(value: 5, min: 3, max: 7); // ok
+  // withinTolerance3(5, 3, 7); //* error
+  // withinTolerance3(5); //* error
+}
+
+void functions3() {
+  // functions as first class citizens
+  // functions are objects that can be assigned to variables
+  var blueFont = (String mystring) {
+    return "\x1B[34m" + mystring + "\x1B[0m";
+  };
+  String greenBg(String mystring) {
+    return "\u001b[42m" + mystring + "\u001b[0m";
+  }
+
+  print("Sagar");
+  print(blueFont("Sagar"));
+  print(greenBg("Sagar"));
+  // functions can be passed to functions
+
+  String colorizeText(
+      {required String myString,
+      required Function fontColor,
+      required Function bgColor}) {
+    return fontColor(bgColor(myString));
+  }
+
+  print(colorizeText(
+      myString: "This is cool", fontColor: blueFont, bgColor: greenBg));
+}
+
+void closures() {
+  // anonymous functions are closures, and have access to surrounding scope
+  // useful for creating functions that return functions
+  Function maxClipper(int clipAt) {
+    return (int value) {
+      return (value > clipAt) ? clipAt : value;
+    };
+  }
+
+  var clipper5volt = maxClipper(5);
+  print(clipper5volt(10));
+  print(clipper5volt(2));
 }
