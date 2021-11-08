@@ -13,5 +13,7 @@ dev_dependencies:
   lints: ^1.0.0
   test: ^1.16.0
   characters: ^1.2.0
+  dependencies:
+  http: any
   # add dependencies here
   # http: ^0.13.4

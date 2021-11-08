@@ -1,9 +1,18 @@
+import 'dart:convert';
 import 'dart:core';
-import 'package:characters/characters.dart';
 import 'dart:math';
+import "dart:convert";
+
+import 'package:characters/characters.dart';
+import 'package:http/http.dart' as http;
+
+import './support.dart' as support;
+
 /*
   This is a block comment
   */
+// normal comment
+/// documentation comment.
 
 // clarification van laatste week, ik weet niet of ik dit moet behandelen
 void constVsFinal() {
@@ -18,7 +27,7 @@ void constVsFinal() {
   // the items are not recussively immutable
   mylist2[0] = "It changed";
   mylist2.add("insert surprisedpikachu.jpg");
-  // mylist2 = [""]; // * but you can't reassign
+  // mylist2 = [""]; // * but you can't reassign a new list to it
   print(mylist2);
 
   var mylist3 = const [""];
@@ -27,6 +36,15 @@ void constVsFinal() {
   // mylist3.add("insert surprisedpikachu.jpg"); // * this as well
   mylist3 = ["ahah"]; // * maar je kan wel reassignen
   print(mylist3);
+
+  // const is only for compile-time constants
+  // meaning you can only use them when the value is known at compile time
+  // assigning a random number, the current time, or the return of some API
+  // are examples of non compile-time constants
+  // const date = DateTime.now(); // * can't be assigned
+  final date = DateTime.now();
+  // guideline: if you know something is not going to get reassigned a new value
+  // prefer to use either const or final. If it's a compile time constant, use const.
 }
 
 void arithmeticOperators1() {
@@ -117,12 +135,26 @@ void strings() {
   var family = '👨🏼‍👨🏼‍👦🏼‍👦🏼';
   print(" number of utf16 code points: ${family.length}");
   print("number of human readable characters: ${family.characters.length}");
+
   var multiline = """
   this is a multiline string.
   You do it by adding 3 single or double qoutes on each end.
   """;
   print(multiline);
+  // long strings that aren't multiline
+  print(
+      // you don't need to + concatenate them when splitting long strings like this
+      // in fact, it is recomended not to.
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+      "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim"
+      " veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea "
+      "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate "
+      "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat "
+      "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id "
+      "est laborum.");
   family = "this is a" + family;
+  // ^ another thing that's not recomended:
+  //prefer interpolation ("blah blah $family") over concatenation
   print(family);
   var someString = "This Is A String";
   print(someString.toLowerCase());
@@ -152,6 +184,131 @@ void strings() {
   var sentence = "this is a sentence";
   var words = sentence.split(" ");
   print(words);
+}
+
+void otherCollections() {
+  // dart calls data structures collections.
+  // some syntaxic sugar to declare collection types, since collections are used so much
+  var points = <Point>[Point(1, 2), Point(2, 2)]; // list
+  var addresses = <String, double>{"sagar": 1, "lorenzo": 2}; // map
+  var counts = <int>{5, 8, 3445, 89}; // set
+  // DO add type names for type safety, if you start with an empty collection
+  var myList = []; // don't. Gets the type List<Dynamic>
+  var myBetterList = ["Duck"]; // gets List<String>
+  List<String> myBetterList2 = []; // gets List<String>
+  var myBetterList3 = <int>[]; //gets List<int>
+
+  // list methods
+  myBetterList.add("Frog");
+  myBetterList.remove("Duck");
+  myBetterList.add("Sheep");
+  myBetterList.removeAt(0);
+  print(myBetterList[0]);
+  const drinks = ['water', 'milk', 'juice', 'soda'];
+  print(drinks.first);
+  print(drinks.last);
+  print(drinks.isEmpty);
+  print(drinks.isNotEmpty);
+  print(drinks.length);
+  // guidance: do NOT use .length to check for emptyness.
+  // the collections are not required to know it in O(1) time.
+  // it can be slow for large collections.
+  // use .isEmpty or .isNotEmpty, whichever does not require you to ! negate it
+
+  // spread operator
+  var mammals = ["monkeys", "cats", "dogs"];
+  var animals = ["doves", ...mammals, "jellyfish"];
+  print(animals);
+  List<String>? mammals2; // currently null
+  // animals = [ ...mammals2, "jellyfish"]; // * Don't if nullable
+  animals = ["doves", ...?mammals2, "jellyfish"]; // do this instead
+  // it will only try to include it if it knows mammals2 is not null
+  print(animals);
+
+// collection if
+  const peanutAllergy = true;
+  const candy = [
+    'Mars',
+    'bubblegum',
+    if (!peanutAllergy) 'Snickers',
+  ];
+  print(candy);
+// collection for
+  const deserts = ['gobi', 'sahara', 'arctic'];
+  var bigDeserts = [
+    'ARABIAN',
+    for (var desert in deserts) support.colorizeConsoleText(desert),
+  ];
+  print(bigDeserts);
+
+  // looping over lists
+  // these are equivalent
+  for (var drink in drinks) {
+    support.printColorizedConsoleText(drink);
+  }
+  drinks.forEach((drink) => support.printColorizedConsoleText(drink));
+
+  drinks.forEach(support.printColorizedConsoleText);
+
+  // sets
+  // a collection of unordered unique elements
+  var primes = <int>{1, 2, 3, 5, 7, 11};
+  primes.add(13);
+  primes.addAll([17, 19, 23]);
+  primes.remove(1);
+  print(primes);
+  var odd = <int>{1, 3, 5, 7, 9, 11, 13};
+  print(primes.intersection(odd)); // print elements that are odd or prime
+  print(primes.union(odd)); // print elements that are odd and prime
+  // heeft ook de collection for, collection if, en spread operators
+}
+
+void otherCollections2() {
+  final Map<String, double> grades = {
+    "Sagar": 8.8,
+    "Lorenzo": 9.0,
+    "Dernz": 10.0
+  };
+  grades["Sagar"];
+  print(grades["notAPerson"]); // returns null if key doesn't exist
+  grades["NotAPerson"] = 8.7;
+  grades.remove("NotAPerson");
+  print(grades.keys);
+  print(grades.values);
+  print(grades.containsKey("Shane")); // check if exists
+  print(grades.containsValue(10.0));
+
+  // looping
+  // for (var person in grades) { //* Does not work
+  //   print(grades[person]);
+  // }
+  for (var person in grades.keys) {
+    // use this
+    print(grades[person]);
+  }
+  grades.forEach((key, value) => print('$key ->$value')); // or this
+  // or this
+  for (final entry in grades.entries) {
+    print('${entry.key} -> ${entry.value}');
+  }
+  // const vs final
+  // final prevents you from reassigning a new collection to a var
+  // but does not prevent you from modifying the collection itself
+  // if you want a list that can't be changed
+  // final is kinda like `int * const x = someptr` in c/c++, where you can modify the
+  // pointed to object, but you can't reassign the pointer to point to something else
+  //
+  //const is like `int const * const x = someptr` in c/c++, you can neither reassign the
+  //pointer or change the value of the thing it points to
+
+  // there is a problem if you want a nonmodifyable list, but the content is not a compile time constant
+  // you can do this in that case
+  var rng = Random();
+  // const unmodList = [rng.nextInt(100)]; //* error
+  final modifiableList = [rng.nextInt(100), rng.nextInt(200)];
+  final unmodifiableList = List.unmodifiable(modifiableList);
+  // unfortunately, trying to edit a unmodifiable object will give a runtime error
+  // and not a compile time error
 }
 
 enum Weather { rain, sun, snow, unknown } // a bit like scoped enums in c++

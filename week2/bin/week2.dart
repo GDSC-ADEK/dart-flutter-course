@@ -1,15 +1,17 @@
 import 'package:week2/week2.dart' as week2;
 
 void main(List<String> arguments) {
-  week2.constVsFinal();
-  week2.arithmeticOperators1();
-  week2.arithmeticOperators2();
-  week2.incrementDecrement();
-  week2.logicalAndRelationalOps();
-  week2.strings();
-  week2.controlFlow();
-  week2.functions1();
-  week2.functions2();
-  week2.functions3();
-  week2.closures();
+  // week2.constVsFinal();
+  // week2.arithmeticOperators1();
+  // week2.arithmeticOperators2();
+  // week2.incrementDecrement();
+  // week2.logicalAndRelationalOps();
+  // week2.strings();
+  week2.otherCollections();
+  // week2.otherCollections2();
+  // week2.controlFlow();
+  // week2.functions1();
+  // week2.functions2();
+  // week2.functions3();
+  // week2.closures();
 }
