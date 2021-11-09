@@ -10,3 +10,5 @@ We gaan over het volgende
 - classes (hopelijk)
 
 Slides van deze week zijn [hier](./week2_slideshow.pptx)
+
+Excercises van de week zijn [hier](./excercises.md)

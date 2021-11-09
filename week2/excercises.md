@@ -5,7 +5,8 @@ Go to `"./lib/submission.dart"`. It contains 3 unimplemented functions, one for 
 Implement them.
 
 # Excercise 1
-Expected time to complete: 10- 15 mins.
+Expected time to complete: 10- 15 mins.  
+
 A prime is a number that's divisible by _exactly_ 2 numbers: 1 and itself.
 This means that 1 is not a prime.
 Implement a function that returns the sum of the first 1000 primes.
@@ -13,7 +14,8 @@ Implement a function that returns the sum of the first 1000 primes.
 
 
 # Excercise 2
-Expected time to complete: 10 mins.
+Expected time to complete: 10 mins.  
+
 Make a function that accepts `List<String>` and a `List<List<String>>` as arguments.
 The first argument will be a list of strings, each string representing an ingredient  a person is allergic to (an alergen).  
 Each nested list in the 2nd list represents a food item, and each string inside it represents an allergen it contains.
@@ -44,6 +46,8 @@ output : [['sesame seeds', 'rice'], ['shellfish', 'fish'], ['sesame seeds', 'egg
 
 
 # Excercise 3
+Expected time to complete: ~15 mins.   
+
 The ISBN-10 verification process is used to validate book identification numbers. 
 These may contain dashes or spaces as seperator.
 The ISBN-10 format is 9 digits (0 to 9) plus one check character (either a digit or an X only, not both). In the case the check character is an X, this represents the value '10'.
