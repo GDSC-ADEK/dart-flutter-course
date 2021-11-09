@@ -1,12 +1,7 @@
-import 'dart:convert';
 import 'dart:core';
 import 'dart:math';
-import "dart:convert";
 
 import 'package:characters/characters.dart';
-import 'package:http/http.dart' as http;
-
-import './support.dart' as support;
 
 /*
   This is a block comment
@@ -57,7 +52,8 @@ void arithmeticOperators1() {
   // * het is als `c = 100 // 12` in python
   // * of c =  (int) 100 / 12
 
-  print("""
+  print(
+      """
     y = $y
     z = $z
     a = $a
@@ -136,7 +132,8 @@ void strings() {
   print(" number of utf16 code points: ${family.length}");
   print("number of human readable characters: ${family.characters.length}");
 
-  var multiline = """
+  var multiline =
+      """
   this is a multiline string.
   You do it by adding 3 single or double qoutes on each end.
   """;
@@ -186,7 +183,7 @@ void strings() {
   print(words);
 }
 
-void otherCollections() {
+void collections() {
   // dart calls data structures collections.
   // some syntaxic sugar to declare collection types, since collections are used so much
   var points = <Point>[Point(1, 2), Point(2, 2)]; // list
@@ -204,8 +201,11 @@ void otherCollections() {
   myBetterList.add("Sheep");
   myBetterList.removeAt(0);
   print(myBetterList[0]);
-  const drinks = ['water', 'milk', 'juice', 'soda'];
+  var drinks = ['water', 'milk', 'juice', 'soda'];
+  // you can concatenate lists
+  drinks += ["beer", "wine", "dawet"];
   print(drinks.first);
+  drinks.sort();
   print(drinks.last);
   print(drinks.isEmpty);
   print(drinks.isNotEmpty);
@@ -237,18 +237,18 @@ void otherCollections() {
   const deserts = ['gobi', 'sahara', 'arctic'];
   var bigDeserts = [
     'ARABIAN',
-    for (var desert in deserts) support.colorizeConsoleText(desert),
+    for (var desert in deserts) colorizeConsoleText(desert),
   ];
   print(bigDeserts);
 
   // looping over lists
   // these are equivalent
   for (var drink in drinks) {
-    support.printColorizedConsoleText(drink);
+    printColorizedConsoleText(drink);
   }
-  drinks.forEach((drink) => support.printColorizedConsoleText(drink));
+  drinks.forEach((drink) => printColorizedConsoleText(drink));
 
-  drinks.forEach(support.printColorizedConsoleText);
+  drinks.forEach(printColorizedConsoleText);
 
   // sets
   // a collection of unordered unique elements
@@ -263,7 +263,7 @@ void otherCollections() {
   // heeft ook de collection for, collection if, en spread operators
 }
 
-void otherCollections2() {
+void collections2() {
   final Map<String, double> grades = {
     "Sagar": 8.8,
     "Lorenzo": 9.0,
@@ -291,6 +291,7 @@ void otherCollections2() {
   for (final entry in grades.entries) {
     print('${entry.key} -> ${entry.value}');
   }
+
   // const vs final
   // final prevents you from reassigning a new collection to a var
   // but does not prevent you from modifying the collection itself
@@ -388,21 +389,23 @@ void controlFlow() {
 
 void functions1() {
   bool isBreakTime(DateTime now) {
-    var begin = DateTime(2021, 11, 13, 16, 0, 0, 0);
-    var end = DateTime(2021, 11, 13, 16, 15, 0, 0);
+    var begin = DateTime(2021, 11, 20, 16, 0, 0, 0);
+    var end = DateTime(2021, 11, 20, 16, 15, 0, 0);
     return begin.isBefore(now) && end.isAfter(now);
   }
 
   // anonymous functions (unnamed functions) can be assigned to a Function var
+  // although, assigning it a name indicates you probably need the more traditional
+  // function delcaration
   Function isBreakTime2 = (DateTime now) {
-    var begin = DateTime(2021, 11, 13, 16, 0, 0, 0);
-    var end = DateTime(2021, 11, 13, 16, 15, 0, 0);
+    var begin = DateTime(2021, 11, 20, 16, 0, 0, 0);
+    var end = DateTime(2021, 11, 20, 16, 15, 0, 0);
     return begin.isBefore(now) && end.isAfter(now);
   };
   // arrow functions
   bool isBreakTime3(DateTime now) =>
-      DateTime(2021, 11, 13, 16, 0, 0, 0).isBefore(now) &&
-      DateTime(2021, 11, 13, 16, 15, 0, 0).isAfter(now);
+      DateTime(2021, 11, 20, 16, 0, 0, 0).isBefore(now) &&
+      DateTime(2021, 11, 20, 16, 15, 0, 0).isAfter(now);
   // return_type fnct_name(parameters) => expression;
   // you usually use those for quick oneliner functions
   // ^ that doesn't fit reasonably on a line, so you'd rather use the method employed in isBreakTime2
@@ -427,6 +430,9 @@ void functions2() {
     return min <= value && value <= max;
   }
 
+  print(withinTolerance(10));
+  print(fullName("Sagar", "Ramsaransing"));
+
   // function with named parameters
   bool withinTolerance2(int value, {int min = 0, int max = 10}) {
     return min <= value && value <= max;
@@ -436,7 +442,7 @@ void functions2() {
   withinTolerance(5, 3, 7); // ok
   withinTolerance2(5, min: 3, max: 7); // ok
   withinTolerance2(5); // ok
-  // withinTolerance2(3, 5,7); // * error
+  // withinTolerance2(5, 3,7); // * error
 
   // what if you want named parameters but not optional ones?
   bool withinTolerance3({required int value, required int min, required max}) {
@@ -451,9 +457,10 @@ void functions2() {
 void functions3() {
   // functions as first class citizens
   // functions are objects that can be assigned to variables
-  var blueFont = (String mystring) {
+  String blueFont(String mystring) {
     return "\x1B[34m" + mystring + "\x1B[0m";
-  };
+  }
+
   String greenBg(String mystring) {
     return "\u001b[42m" + mystring + "\u001b[0m";
   }
@@ -462,7 +469,6 @@ void functions3() {
   print(blueFont("Sagar"));
   print(greenBg("Sagar"));
   // functions can be passed to functions
-
   String colorizeText(
       {required String myString,
       required Function fontColor,
@@ -472,6 +478,25 @@ void functions3() {
 
   print(colorizeText(
       myString: "This is cool", fontColor: blueFont, bgColor: greenBg));
+
+  bool isEven(int n) => n % 2 == 0;
+  int square(int n) => n * n;
+  var someNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  var squaredEvenNums = someNumbers.where(isEven).map(square).toList();
+  // ^ toList, because map and where return iterables, which can then
+  // be converted to sets, lists, etc
+  print(squaredEvenNums);
+  // you can reduce down an iterable
+  var total = squaredEvenNums.reduce((sum, element) => sum + element);
+  print(total);
+  // but prefer fold over reduce, because it works on empty iterables
+  // while reduce doesn't
+  List<int> nums = [];
+  var total2 = nums.fold(
+    0,
+    (int sum, element) => sum + element,
+  );
+  print(total2);
 }
 
 void closures() {
@@ -486,4 +511,13 @@ void closures() {
   var clipper5volt = maxClipper(5);
   print(clipper5volt(10));
   print(clipper5volt(2));
+}
+
+// ignore these
+String colorizeConsoleText(String myString) {
+  return "\u001b[42m\x1B[34m" + myString + "\x1B[0m\u001b[0m";
+}
+
+void printColorizedConsoleText(String myString) {
+  print("\u001b[42m\x1B[34m" + myString + "\x1B[0m\u001b[0m");
 }
