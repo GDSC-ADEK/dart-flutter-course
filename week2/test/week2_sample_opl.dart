@@ -42,6 +42,15 @@ List<List<String>> exercise2(
   return dangerous.map((e) => e.toList()).toList();
 }
 
+List<List<String>> exercise2b(
+    List<String> person, List<List<String>> foodItems) {
+  return foodItems
+      .map((foodAlergens) => foodAlergens.toSet())
+      .where((food) => person.toSet().intersection(food).isNotEmpty)
+      .map((e) => e.toList())
+      .toList();
+}
+
 bool exercise3(String isbn) {
   const char2Value = {
     "0": 0,

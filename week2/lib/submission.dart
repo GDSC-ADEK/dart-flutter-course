@@ -2,13 +2,15 @@ import "dart:math";
 
 // implement the function
 int sumPrimes() {
-  return 1;
+  var sumOfPrimes = 0;
+  return sumOfPrimes;
 }
 
 // implement the function
 List<List<String>> exercise2(
     List<String> person, List<List<String>> foodItems) {
-  return <List<String>>[];
+  var dangerousFoods = <List<String>>[];
+  return dangerousFoods;
 }
 
 // implement the function

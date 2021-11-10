@@ -52,8 +52,7 @@ void arithmeticOperators1() {
   // * het is als `c = 100 // 12` in python
   // * of c =  (int) 100 / 12
 
-  print(
-      """
+  print("""
     y = $y
     z = $z
     a = $a
@@ -132,8 +131,7 @@ void strings() {
   print(" number of utf16 code points: ${family.length}");
   print("number of human readable characters: ${family.characters.length}");
 
-  var multiline =
-      """
+  var multiline = """
   this is a multiline string.
   You do it by adding 3 single or double qoutes on each end.
   """;
@@ -257,9 +255,10 @@ void collections() {
   primes.addAll([17, 19, 23]);
   primes.remove(1);
   print(primes);
+  print(primes.contains(3)); // does 3 exist in primes
   var odd = <int>{1, 3, 5, 7, 9, 11, 13};
-  print(primes.intersection(odd)); // print elements that are odd or prime
-  print(primes.union(odd)); // print elements that are odd and prime
+  print(primes.intersection(odd)); //elements that are odd and prime
+  print(primes.union(odd)); // elements that are odd or prime
   // heeft ook de collection for, collection if, en spread operators
 }
 
@@ -360,15 +359,14 @@ void controlFlow() {
   for (int i = 0; i < myString.runes.length; i++) {
     print(myString[i]);
   }
-  // there's also the forEach, but it doesn't work on strings.
-  // it does work on other collections
-  var firstPrimes = [2, 3, 5, 7, 11, 13, 17];
-  firstPrimes.forEach((prime) {
-    // not recommended, but it exists
-    print(prime);
+  // there's also the forEach, only for collections
+  myString.runes.forEach((rune) {
+    print(String.fromCharCode(rune));
+    // although, it is more intended to be used
+    // by passing .forEach(someFunction)
   });
-
-  firstPrimes.forEach((prime) => print(prime));
+  // same, but with arrow syntax.
+  myString.runes.forEach((rune) => print(String.fromCharCode(rune)));
 
   // there's the while and do while loop as well, just like C++
 
@@ -389,23 +387,20 @@ void controlFlow() {
 
 void functions1() {
   bool isBreakTime(DateTime now) {
-    var begin = DateTime(2021, 11, 20, 16, 0, 0, 0);
-    var end = DateTime(2021, 11, 20, 16, 15, 0, 0);
+    var begin = DateTime(2021, 11, 13, 17, 0, 0, 0);
+    var end = DateTime(2021, 11, 13, 17, 15, 0, 0);
     return begin.isBefore(now) && end.isAfter(now);
   }
 
-  // anonymous functions (unnamed functions) can be assigned to a Function var
-  // although, assigning it a name indicates you probably need the more traditional
-  // function delcaration
   Function isBreakTime2 = (DateTime now) {
-    var begin = DateTime(2021, 11, 20, 16, 0, 0, 0);
-    var end = DateTime(2021, 11, 20, 16, 15, 0, 0);
+    var begin = DateTime(2021, 11, 13, 17, 0, 0, 0);
+    var end = DateTime(2021, 11, 13, 17, 15, 0, 0);
     return begin.isBefore(now) && end.isAfter(now);
   };
-  // arrow functions
+
   bool isBreakTime3(DateTime now) =>
-      DateTime(2021, 11, 20, 16, 0, 0, 0).isBefore(now) &&
-      DateTime(2021, 11, 20, 16, 15, 0, 0).isAfter(now);
+      DateTime(2021, 11, 13, 17, 0, 0, 0).isBefore(now) &&
+      DateTime(2021, 11, 13, 17, 15, 0, 0).isAfter(now);
   // return_type fnct_name(parameters) => expression;
   // you usually use those for quick oneliner functions
   // ^ that doesn't fit reasonably on a line, so you'd rather use the method employed in isBreakTime2
@@ -511,6 +506,29 @@ void closures() {
   var clipper5volt = maxClipper(5);
   print(clipper5volt(10));
   print(clipper5volt(2));
+}
+
+class User {
+  int id;
+  String name;
+
+  // default, long form constructor
+  // User(int id, String name) {
+  //   this.id = id;
+  //   this.name = name;
+  // }
+
+  // short form constructor
+  User(this.id, this.name);
+
+  @override
+  String toString() {
+    return 'User(id: $id, name: $name)';
+  }
+
+  String toJson() {
+    return '{"id":$id,"name":"$name"}';
+  }
 }
 
 // ignore these

@@ -1,14 +1,15 @@
 
-Content voor week 2.
-We gaan over het volgende
-- hoe je een dart project start
-- de dependencies file
-- Arithmic operators
-- logical operators
+Content for week 2.
+We'll go over the following:
+- how to start a dart project
+- how to manage dependencies
+- how to run your project
+- operators
 - collections
 - functions
-- classes (hopelijk)
+- classes (maybe)
 
-Slides van deze week zijn [hier](./week2_slideshow.pptx)
 
-Excercises van de week zijn [hier](./excercises.md)
+Powerpoint slides are [here](./week2_slideshow.pptx)
+
+This week's excercises can be found [here](./excercises.md)

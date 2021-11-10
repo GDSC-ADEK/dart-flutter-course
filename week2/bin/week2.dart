@@ -4,7 +4,7 @@ import 'package:week2/submission.dart' as submission;
 
 void main(List<String> arguments) {
   // week2.constVsFinal();
-  // week2.arithmeticOperators1();
+  week2.arithmeticOperators1();
   // week2.arithmeticOperators2();
   // week2.incrementDecrement();
   // week2.logicalAndRelationalOps();

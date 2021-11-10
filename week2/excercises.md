@@ -1,7 +1,7 @@
 
 
-#Instructions
-Go to `"./lib/submission.dart"`. It contains 3 unimplemented functions, one for each excercise.
+# Instructions
+Go to [./lib/submission.dart](./lib/submission.dart) It contains 3 unimplemented functions, one for each excercise.
 Implement them.
 
 # Excercise 1
