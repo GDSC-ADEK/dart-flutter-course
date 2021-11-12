@@ -56,7 +56,6 @@ A few examples of valid isbn-10 identifiers:
 0-587-35505-0
 0 9984849 7 0
 0 262-36085 3
-0-16-349170-x
 ```
 
 To check wether a given identifier is valid, the following formula is used
