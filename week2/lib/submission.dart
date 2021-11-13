@@ -2,8 +2,7 @@ import "dart:math";
 
 // implement the function
 int sumPrimes() {
-  var sumOfPrimes = 0;
-  return sumOfPrimes;
+  return -1;
 }
 
 // implement the function

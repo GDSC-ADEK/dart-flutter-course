@@ -2,6 +2,7 @@ import 'dart:core';
 import 'dart:math';
 
 import 'package:characters/characters.dart';
+import 'package:collection/collection.dart';
 
 /*
   This is a block comment
@@ -187,6 +188,16 @@ void collections() {
   var points = <Point>[Point(1, 2), Point(2, 2)]; // list
   var addresses = <String, double>{"sagar": 1, "lorenzo": 2}; // map
   var counts = <int>{5, 8, 3445, 89}; // set
+  // quick note
+  // dart does not compare equality between collections
+  var a = ["a", "b"];
+  var b = ["a", "b"];
+  print(a == b); // false
+  // to do it correctly
+  // import 'package:collection/collection.dart';
+  Function eq = const DeepCollectionEquality().equals;
+  print(eq(a, b)); // true
+
   // DO add type names for type safety, if you start with an empty collection
   var myList = []; // don't. Gets the type List<Dynamic>
   var myBetterList = ["Duck"]; // gets List<String>
@@ -199,6 +210,10 @@ void collections() {
   myBetterList.add("Sheep");
   myBetterList.removeAt(0);
   print(myBetterList[0]);
+  var letters = ["a", "b", "c", "d", "e", "f"];
+  print(letters.sublist(1, 3));
+  // ^ left inclusive, right exclusive
+
   var drinks = ['water', 'milk', 'juice', 'soda'];
   // you can concatenate lists
   drinks += ["beer", "wine", "dawet"];
@@ -241,6 +256,9 @@ void collections() {
 
   // looping over lists
   // these are equivalent
+  for (int i = 0; i < drinks.length; i++) {
+    printColorizedConsoleText(drinks[i]);
+  }
   for (var drink in drinks) {
     printColorizedConsoleText(drink);
   }
@@ -250,7 +268,7 @@ void collections() {
 
   // sets
   // a collection of unordered unique elements
-  var primes = <int>{1, 2, 3, 5, 7, 11};
+  var primes = {1, 2, 3, 5, 7, 11};
   primes.add(13);
   primes.addAll([17, 19, 23]);
   primes.remove(1);
@@ -259,6 +277,9 @@ void collections() {
   var odd = <int>{1, 3, 5, 7, 9, 11, 13};
   print(primes.intersection(odd)); //elements that are odd and prime
   print(primes.union(odd)); // elements that are odd or prime
+  // want to know if any item in some collection is in some other collection
+  var importantNums = {1, 2, 3, 4, 5};
+  print(importantNums.intersection(primes).isNotEmpty); // prints true
   // heeft ook de collection for, collection if, en spread operators
 }
 

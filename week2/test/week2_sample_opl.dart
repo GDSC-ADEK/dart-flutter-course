@@ -7,7 +7,7 @@ int sumPrimes() {
       // 2,3 are prime
       return n > 1;
     }
-    if (n % 2 == 0) return false; // uneven is not prime
+    if (n % 2 == 0) return false; // even is not prime
     double max = sqrt(n);
     for (int i = 3; i <= max; i += 2) {
       // i = 3,5,7
@@ -40,6 +40,18 @@ List<List<String>> exercise2(
   var dangerous = foods.where((food) => personal.intersection(food).isNotEmpty);
   // transform Iterator<Set<String>> to List<List<String>> and return it
   return dangerous.map((e) => e.toList()).toList();
+}
+
+List<List<String>> exercise2a(
+    List<String> person, List<List<String>> foodItems) {
+  var dangerousFoods = <List<String>>{};
+  for (var alergen in person) {
+    for (var food in foodItems) {
+      if (food.contains(alergen)) dangerousFoods.add(food);
+    }
+  }
+
+  return dangerousFoods.toList();
 }
 
 List<List<String>> exercise2b(

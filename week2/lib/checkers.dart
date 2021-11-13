@@ -257,14 +257,18 @@ void ex2Checker(Function yourFunction) {
   for (var testCase in data) {
     List<String> arg1 = testCase["personalAlergen"]![0];
     var arg2 = testCase["foodItems"];
-    var result = testCase["result"];
-    var yourResult = yourFunction(arg1, arg2);
+    List<List<String>> result = List.from(testCase["result"]!);
+    result.sort((a, b) => a.length.compareTo(b.length));
+    List<List<String>> yourResult = yourFunction(arg1, arg2);
+    yourResult.sort((a, b) => a.length.compareTo(b.length));
     var passed = deepEq(yourResult, result);
 
     if (!passed) {
       print("Testcase failed with these arguments");
       print("arg1: $arg1");
       print("arg2: $arg2");
+      // print("result $yourResult");
+      // print("expected: $result");
       return;
     } else {
       print("Testcase passed");
