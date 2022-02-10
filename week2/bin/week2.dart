@@ -5,7 +5,7 @@ import 'dart:collection';
 
 void main(List<String> arguments) {
   // week2.constVsFinal();
-  week2.arithmeticOperators1();
+  // week2.arithmeticOperators1();
   // week2.arithmeticOperators2();
   // week2.incrementDecrement();
   // week2.logicalAndRelationalOps();
@@ -18,7 +18,7 @@ void main(List<String> arguments) {
   // week2.functions3();
   // week2.closures();
 
-  // checkers.ex1Checker(submission.sumPrimes());
+  checkers.ex1Checker(submission.sumPrimes());
   // checkers.ex2Checker(submission.exercise2);
   // checkers.ex3Checker(submission.exercise3);
 }
