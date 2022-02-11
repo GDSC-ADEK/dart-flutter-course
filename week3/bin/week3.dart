@@ -8,4 +8,7 @@ void main(List<String> arguments) {
   week3.privateVarsGetterSetters();
   week3.staticVars();
   advanced_classes.inheritance();
+  advanced_classes.mixins();
+  advanced_classes.interfaces();
+  advanced_classes.extensions();
 }
