@@ -49,8 +49,8 @@ Animals eat between 60 and 120 ticks, and for this duration, calling `.status()`
 
 `void reproduce(Animal animal)`
 Animals are able to reproduce when they reach maturity (measured in ticks). They produce either an Egg, or another instance of their class. They produce this after a specified time, and these can be aqcuired with the next function described.
-Animals eat between 60 and 120 ticks, and for this duration, calling `.status()` should return `Status.reproduce`
-If animal is not the same type as the class, raise an exception. If they are the same type, but also the same sex, they obviously can't produce offspring.
+Animals reproduce between 60 and 120 ticks, and for this duration, calling `.status()` should return `Status.reproduce`
+If animal is not the same type as the class, raise an exception. if the animal is not mature, or If they are the same type, but also the same sex, raise an exception.
 while it's reproducing, tiredness and hunger increase by 2 per tick.
 
 
@@ -73,7 +73,15 @@ eat: if it's hunger is above 8000. if there's no appropriate food available for 
 sleep: if it's tiredness is above 8000, or if it's their appropriate time to sleep (7-18 is daytime, 19-6 is nighttime)
 a random choice of whichever of the following it can do: fly, walk, do nothing, swim, reproduce, makenoise
 Keep in mind that actions increase hunger and tiredness. if either of these reaches 10000, the animal dies.
-Ff it dies, `.status()` will always return `Status.dead` and the update loop should do nothing from then on.
+If it dies, `.status()` will always return `Status.dead` and the update loop should do nothing from then on.
+
+
+`Status status()`
+returns the status of the animal. is it walking, flying, doing nothing, dead, etc.
+
+constructors:
+For the sake of simplicity, the only 2 constructors each animal needs is the default one, and one that accepts (int age_ticks, Sex sex, Status status).
+the status of a default constructed animal before update is run is `Status.doNothing`.
 
 
 The following things will be made available for you:
@@ -143,11 +151,11 @@ goes errrrrrrrrrr
 
 
 
-1 dag = 180000 ticks   
-1 uur = 750 ticks   
+1 dag = 180000 ticks
+1 uur = 750 ticks
 
-hunger = 10000   
-cutoff = 80000   
-hunger = ~12 * 750 * 1.25 = ~11250   
-food = 3x6000   
-sleep = 8 * 750 * 1.6 = 10000   
+hunger = 10000
+cutoff = 80000
+hunger = ~12 * 750 * 1.25 = ~11250
+food = 3x6000
+sleep = 8 * 750 * 1.6 = 10000
