@@ -72,7 +72,7 @@ every tick, this function is called. It chooses one of the following things to d
 eat: if it's hunger is above 8000. if there's no appropriate food available for the animal, it does not eat, and will die when hunger reaches 10000.
 sleep: if it's tiredness is above 8000, or if it's their appropriate time to sleep (7-18 is daytime, 19-6 is nighttime)
 a random choice of whichever of the following it can do: fly, walk, do nothing, swim, reproduce, makenoise
-Keep in mind that actions increase hunger and tiredness. if either of these reaches 10000, the animal dies. 
+Keep in mind that actions increase hunger and tiredness. if either of these reaches 10000, the animal dies.
 Ff it dies, `.status()` will always return `Status.dead` and the update loop should do nothing from then on.
 
 
@@ -143,11 +143,11 @@ goes errrrrrrrrrr
 
 
 
-1 dag = 180000 ticks
-1 uur = 750 ticks
+1 dag = 180000 ticks   
+1 uur = 750 ticks   
 
-hunger = 10000
-cutoff = 80000
-hunger = ~12 * 750 * 1.25 = ~11250 
-food = 3x6000
-sleep = 8 * 750 * 1.6 = 10000
+hunger = 10000   
+cutoff = 80000   
+hunger = ~12 * 750 * 1.25 = ~11250   
+food = 3x6000   
+sleep = 8 * 750 * 1.6 = 10000   
