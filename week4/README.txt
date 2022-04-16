@@ -1,6 +1,6 @@
 All widgets are either stateful or stateless. Stateful widgets are for when you want to see changes in the UI as the state changes. The members of widgets are supposed to be final or const, they are immutable. The data that does change for stateful widgets is maintained in a separate State object.
 
-```dart
+```
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -33,7 +33,7 @@ When `setState` is called, the stateful widget gets rebuilt. Setstate accepts a 
 
 All widgets have a   `build(BuildContext)` method. The build method basically says what it should display, which child widgets, etc. When creating your own widgets, you usually override it. Here's an example of one. `BuildContext` provides build to access information from it's parents.
 
-```dart
+```
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
